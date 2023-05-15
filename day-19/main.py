@@ -1,40 +1,28 @@
+import turtle
+from random import random
 from turtle import Turtle, Screen
 
-tim = Turtle()
-
+is_race_on = False
 screen = Screen()
+screen.setup(width=1000, height=800)
+user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will winn the race? Enter a colour: ")
+colors = ["red", "orange", "yellow", "green", "blue", "purple"]
+y_position = [-140, -80, -20, 40, 100, 160]
+all_turtles =[]
 
+for turtle_index in range(0, 6):
+    new_turtple = Turtle(shape="turtle")
+    new_turtple.penup()
+    new_turtple.color(colors[turtle_index])
+    new_turtple.goto(x=-475, y=y_position[turtle_index])
 
-def move_forwards():
-    tim.forward(10)
+if user_bet:
+    is_race_on = True
 
+while is_race_on:
 
-def move_backward():
-    tim.backward(10)
-
-
-def move_left():
-    new_heading = tim.heading() + 10
-    tim.setheading(new_heading)
-    tim.forward(10)
-
-
-def move_right():
-    new_heading = tim.heading() - 10
-    tim.setheading(new_heading)
-    tim.forward(10)
-
-
-def clear():
-    tim.home()
-    tim.clear()
-
-screen.listen()
-screen.onkey(key="w", fun=move_forwards)
-screen.onkey(key="s", fun=move_backward)
-screen.onkey(key="a", fun=move_left)
-screen.onkey(key="d", fun=move_right)
-screen.onkey(key="c", fun=clear)
-
+    for turtle in all_turtles:
+        rand_distance = random.ranint(0, 10)
+        turtle.forward(rand_distance)
 
 screen.exitonclick()
